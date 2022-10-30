@@ -135,11 +135,16 @@ int main(void)
 			  lovedekEmelkedes.lastCheck = msTicks;
 			  lovedekFeljebb();
 		  }
-
-		  // új kepernyokep
+		  if(kacsaHaldoklik && ((msTicks - kacsaVillogas.lastCheck) > kacsaVillogas.interval)){
+			  kacsaVillogas.lastCheck = msTicks;
+			  haldokloKacsaCounter++;
+			  if(haldokloKacsaCounter == 5)
+				  eltunoKacsa();
+		  }
+		  // Uj kepernyokep
 		  if(msTicks - kepfrissites.lastCheck > kepfrissites.interval){
 			  kepfrissites.lastCheck = msTicks;
-			  render(getPoz(),kacsaPozicio,0,0,lovedek,osszesKacsa,lelottKacsa);
+			  render(getPoz(),kacsaPozicio,kacsaHaldoklik,haldokloKacsaCounter,lovedek,osszesKacsa,lelottKacsa);
 		  }
 
 

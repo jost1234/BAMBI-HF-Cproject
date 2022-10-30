@@ -16,6 +16,8 @@ const uint8_t kacsaDefaultIdoKvantum = 5;
 
 uint8_t jatekosPozicio; // kozepen kezdjen
 
+bool kacsaHaldoklik;
+uint8_t haldokloKacsaCounter;
 bool kacsaUtolso;
 uint8_t osszesKacsa;	// eredményjelzönek kell
 uint8_t lelottKacsa;	//
@@ -57,14 +59,19 @@ void ujKacsa(){
 	osszesKacsa++;
 	kacsaElettartam.lastCheck = msTicks;
 	kacsaRender(kacsaPozicio, true);
+	kacsaHaldoklik = false;
+	haldokloKacsaCounter = 0;
 }
 
 void eltunoKacsa(){
+	kacsaHaldoklik = false;
+	haldokloKacsaCounter = 0;
+
 	kacsaElozoPozicio = kacsaPozicio;
 	kacsaRender(kacsaPozicio, false);
 	kacsaPozicio = pozicioMax + 1;
 	kacsaWait.lastCheck = msTicks;
-	if(osszesKacsa == 25)
+	if(osszesKacsa >= 25)
 		kacsaUtolso = true;
 }
 
@@ -83,7 +90,7 @@ void Kacsa(){
 		}
 	}
 	else{
-		if(msTicks - kacsaElettartam.lastCheck > kacsaElettartam.interval){
+		if((msTicks - kacsaElettartam.lastCheck > kacsaElettartam.interval) && !kacsaHaldoklik){
 			kacsaElettartam.lastCheck = msTicks;
 			eltunoKacsa();
 		}
@@ -109,7 +116,8 @@ void lovedekFeljebb(){
 	else if(lovedek.magassag == lm_magas){ // vagyis
 		// ha eltalal egy kacsat: a kacsa meghal
 		if(kacsaPozicio == lovedek.pozicio){
-			eltunoKacsa();
+			kacsaHaldoklik = true;
+			//eltunoKacsa();
 			lelottKacsa++;
 		}
 

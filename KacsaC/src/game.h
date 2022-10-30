@@ -37,6 +37,8 @@ extern uint8_t lelottKacsa;	//
 extern uint8_t kacsaPozicio;
 extern uint8_t kacsaElozoPozicio;
 extern bool kacsaUtolso;
+extern bool kacsaHaldoklik;
+extern uint8_t haldokloKacsaCounter;
 
 extern lov_type lovedek;
 

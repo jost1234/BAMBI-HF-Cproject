@@ -28,7 +28,8 @@ extern idozites kacsaElettartam;
 extern const int kacsaElettatramKvantum;
 extern idozites kacsaWait;
 extern const int kacsaWaitKvantum;
-
+extern idozites kacsaVillogas;
+extern const int kacsaVillogasInt;
 
 
 void InitCounter(void);
