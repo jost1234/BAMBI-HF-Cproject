@@ -12,7 +12,18 @@ typedef struct {
     uint32_t timeRemaining;
 } RemainingTime;
 
+typedef struct {
+	uint32_t interval;
+	uint32_t lastCheck;
+} idozites;
+
+
+
+
+
 void InitCounter(void);
 void SysTick_Handler(void);
 void Delay(uint32_t dlyTicks);
 RemainingTime CheckTime(RemainingTime input);
+
+
