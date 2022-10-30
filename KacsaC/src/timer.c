@@ -19,7 +19,7 @@ const int lovedekEmelkedesInt = 300;
 
 idozites kacsaElettartam;
 
-const int kacsaElettatramKvantum = 2000;
+const int kacsaElettatramKvantum = 1500;
 idozites kacsaWait;
 const int kacsaWaitKvantum = 500;
 

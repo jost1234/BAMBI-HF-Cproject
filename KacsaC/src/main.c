@@ -35,7 +35,7 @@
  *
  */
 
-/* ÁLLAPOTGÉP
+/* ALLLAPOTGEP
  *
  *	_sInit: kezdöállapot, feladata a különbözö perifériák, változok beallitasa
  *	_sStart: ekkor lehet nehezseget allitani, 's' karakter érkezése esetén lépünk tovább
@@ -57,6 +57,9 @@ int main(void)
   InitCounter();
   InitUART();
   LCD_Kijelzo_Init();
+
+  srand(GPIO_PortInGet(gpioPortC) * msTicks);
+
   allapot state = _sInit;
   uint8_t button = 0;
   // Infinite loop

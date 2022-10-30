@@ -1,5 +1,4 @@
 #include "uart.h"
-
 /*
  * uart.c
  *
@@ -14,6 +13,11 @@ void InitUART(){
 	CMU->HFPERCLKEN0 |= CMU_HFPERCLKEN0_GPIO;
 	GPIO_PinModeSet(gpioPortF, 7, gpioModePushPull, 1);
 	CMU_ClockEnable(cmuClock_UART0, true);
+
+	GPIO_PinModeSet(gpioPortC, 0, gpioModeInput, 0);
+	GPIO_PinModeSet(gpioPortC, 3, gpioModeInput, 0);
+	GPIO_PinModeSet(gpioPortC, 4, gpioModeInput, 0);
+	GPIO_PinModeSet(gpioPortC, 5, gpioModeInput, 0);
 
 	USART_InitAsync_TypeDef UART0_init = USART_INITASYNC_DEFAULT;
 	USART_InitAsync(UART0, &UART0_init);

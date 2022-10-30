@@ -52,11 +52,7 @@ uint8_t getPoz(){
 void ujKacsa(){
 	do{
 		// ne ugyanoda kerüljön: majd nezzuk meg a randot, ha furan mukodik
-		//kacsaPozicio = pozicioMin + rand()/RAND_MAX*pozicioMax;
-		if(kacsaPozicio <= pozicioMax)
-			kacsaPozicio = kacsaElozoPozicio +1;
-		else
-			kacsaPozicio = pozicioMin;
+		kacsaPozicio = pozicioMin + (int)((double)rand()/(double)RAND_MAX*(double)pozicioMax);
 	} while (kacsaPozicio == kacsaElozoPozicio);
 	osszesKacsa++;
 	kacsaElettartam.lastCheck = msTicks;
