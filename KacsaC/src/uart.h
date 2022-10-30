@@ -10,4 +10,7 @@
 #include "em_usart.h"
 #include "em_gpio.h"
 
+extern volatile int UARTValue;
+extern volatile bool UARTFlag;
+
 void InitUART();

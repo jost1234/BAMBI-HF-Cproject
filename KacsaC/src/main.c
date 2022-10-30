@@ -2,7 +2,9 @@
 #include "em_chip.h"
 #include "timer.h"
 
-
+#include "start.h"
+#include "uart.h"
+#include <ctype.h>
 
 /*
  * Kacsa vadaszat (Soros port)
@@ -37,20 +39,86 @@
  *	-sJatekVege: a játékosidönek vége
  *
 */
-typedef enum {_sInit, _sStart, _sJatek, _sJatekVege} allapot;
+typedef enum {_sInit,_sStart, _sJatek, _sJatekVege} allapot;
+
+void Error(){}
+
 
 
 int main(void)
 {
-  /* Chip errata */
+	/* Chip errata */
   CHIP_Init();
 
   InitUART();
 
-  //Timer inicializacio
-  InitCounter();
-
+  allapot state = _sInit;
+  int button = 0;
   /* Infinite loop */
   while (1) {
+	  switch (state){
+
+
+	  case _sInit:
+		  initGame();
+		  state = _sStart;
+		  break;
+
+
+	  case _sStart:
+		  if(UARTFlag){
+			  button = tolower(UARTValue);
+			  switch (button){
+			  case '+':
+				  nehezsegNovel();
+				  break;
+			  case '-':
+				  nehezsegCsokkent();
+				  break;
+			  case 's':
+				  state = _sJatek;
+				  break;
+			  default:
+				  Error();
+				  break;
+			  }
+			  UARTFlag = false;
+		  }
+
+		  break;
+
+
+	  case _sJatek:
+		  if(UARTFlag){
+			  button = tolower(UARTValue);
+			  switch (button){
+			  case 'a':
+				  jatekosBalraLep();
+				  break;
+			  case 'd':
+				  jatekosJobbraLep();
+				  break;
+			  case 'w':
+				  lovedekKiloves(getPoz());
+				  break;
+			  default:
+				  Error();
+				  break;
+			  }
+			  UARTFlag = false;
+		  }
+
+		  if(osszesKacsa > 25)
+			  state = _sJatekVege;
+		  break;
+
+
+	  case _sJatekVege:
+		  break;
+
+
+	  default:
+		  break;
+	  }
   }
 }
