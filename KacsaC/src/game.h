@@ -10,6 +10,9 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include "timer.h"
+#include "timer.h"
+#include "start.h"
+//#include "kijelzo.h"
 
 #define DEFAULT_BOARD_SIZE 7
 
@@ -31,30 +34,23 @@ extern uint8_t jatekosPozicio; // kozepen kezdjen
 
 extern uint8_t osszesKacsa;	// eredményjelzönek kell
 extern uint8_t lelottKacsa;	//
-
 extern uint8_t kacsaPozicio;
 extern uint8_t kacsaElozoPozicio;
-extern uint8_t kacsaMaradekIdo;
+extern bool kacsaUtolso;
+
 extern lov_type lovedek;
 
-extern volatile uint32_t msTicks;
-extern idozites kepfrissites;
-extern idozites lovedekEmelkedes;
-
-
-extern volatile uint32_t msTicks;
-extern idozites kepfrissites;
-extern idozites lovedekEmelkedes;
 //FUGGVENYEK
 
 void jatekosBalraLep();
-
 void jatekosJobbraLep();
-
 uint8_t getPoz();
 
+extern void kacsaRender(uint8_t kacsaPoz, bool on);
 void ujKacsa();
+void eltunoKacsa();
+void initKacsa();
+void Kacsa();
 
 void lovedekKiloves(uint8_t poz);
-
 void lovedekFeljebb();

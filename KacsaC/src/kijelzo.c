@@ -49,13 +49,13 @@ void jatekosRender(uint8_t jatekosPoz){
 }
 
 // Megjeleniti a kacsát az also sor legfelsö vonalán
-void kacsaRender(uint8_t kacsaPoz){
+void kacsaRender(uint8_t kacsaPoz, bool on){
 	uint8_t com, bit;
 	//uint16_t bitfield = 0B1;     // 0. elem
 
 	com = getComFrom_EFM_Display_Text(kacsaPoz, 0);
 	bit = getBitFrom_EFM_Display_Text(kacsaPoz, 0);
-	LCD_SegmentSet(com, bit, true);
+	LCD_SegmentSet(com, bit, on);
 }
 
 // Megjelenit egy lovedeket
@@ -88,7 +88,8 @@ void render(uint8_t jatekosPoz,uint8_t kacsaPoz, bool eltalaltKacsa,
 
 	jatekosRender(jatekosPoz);
 
-	kacsaRender(kacsaPoz);
+	if(kacsaPozicio < 8)
+		kacsaRender(kacsaPoz, true);
 
 	lovedekRender(plovedek);
 
