@@ -40,7 +40,9 @@ extern idozites kepfrissites;
 extern lov_type lovedek;
 
 
-
+extern volatile uint32_t msTicks;
+extern idozites kepfrissites;
+extern idozites lovedekEmelkedes;
 //FUGGVENYEK
 
 void jatekosBalraLep();
