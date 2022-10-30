@@ -14,9 +14,9 @@ volatile uint32_t msTicks;
 idozites kepfrissites;
 const uint32_t kepFrissiterInt = 50; // 20fps
 idozites lovedekEmelkedes;
-const lovedekEmelkedesInt = 300;
+const int lovedekEmelkedesInt = 300;
 idozites kacsaElettartam;
-const kacsaElettatram0nehezsegen = 5000;
+const int kacsaElettatram0nehezsegen = 5000;
 
 /* Local prototypes */
 /***************************************************************************//**
