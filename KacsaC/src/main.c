@@ -35,6 +35,8 @@ int main(void)
   /* Chip errata */
   CHIP_Init();
 
+  InitUART();
+
   //Timer inicializacio
   InitCounter();
 
