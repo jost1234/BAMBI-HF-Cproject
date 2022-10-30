@@ -8,6 +8,7 @@
  */
 
 volatile int UARTValue;
+volatile bool UARTFlag;
 
 void InitUART(){
 	CMU->HFPERCLKEN0 |= CMU_HFPERCLKEN0_GPIO;
@@ -25,6 +26,8 @@ void InitUART(){
 	USART_IntEnable(UART0, USART_IEN_RXDATAV);
 	NVIC_ClearPendingIRQ(UART0_RX_IRQn);
 	NVIC_EnableIRQ(UART0_RX_IRQn);
+
+	UARTFlag = false;
 }
 
 
@@ -32,5 +35,5 @@ void InitUART(){
 void UART0_RX_IRQHandler(void){
 	USART_IntClear(UART0, USART_IEN_RXDATAV);
 	UARTValue = USART_RxDataGet(UART0);
-
+	UARTFlag = true;
 }
