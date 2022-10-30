@@ -4,8 +4,8 @@
  *  Created on: 2022. okt. 30.
  *      Author: Jost Bence
  */
-#include "game_over.h"
 #include "game.h"
+#include "szovegek.h"
 
 uint8_t endCreditsIdx = 0;
 uint8_t restartStringIdx = 0;

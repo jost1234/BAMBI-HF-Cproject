@@ -7,8 +7,8 @@
 #include "kijelzo.h"
 #include "segmentlcd.h"
 #include "timer.h"
-#include "game_over.h"
 #include <ctype.h>
+#include "szovegek.h"
 
 /*
  * Kacsa vadaszat (Soros port)
@@ -37,7 +37,7 @@
 
 /* ALLLAPOTGEP
  *
- *	_sInit: kezdöállapot, feladata a különbözö perifériák, változok beallitasa
+ *	_sInit: kezdoallapot, feladata a különbözö perifériák, változok beallitasa
  *	_sStart: ekkor lehet nehezseget allitani, 's' karakter érkezése esetén lépünk tovább
  *	_sJatek: a játékosidő; addig megy, mig nem volt osszesen 25 kacsa
  *	-sJatekVege: a játékosidönek vége
