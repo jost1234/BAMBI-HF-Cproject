@@ -6,6 +6,18 @@
 
 volatile uint32_t msTicks;
 
+// typedef struct {
+// uint32_t interval;
+// uint32_t lastCheck;
+// } idozites;
+
+idozites kepfrissites;
+const uint32_t kepFrissiterInt = 50; // 20fps
+idozites lovedekEmelkedes;
+const lovedekEmelkedesInt = 300;
+idozites kacsaElettartam;
+const kacsaElettatram0nehezsegen = 5000;
+
 /* Local prototypes */
 /***************************************************************************//**
  * @brief SysTick_Handler
@@ -19,6 +31,10 @@ void SysTick_Handler(void)
 
 void InitCounter(void){
     msTicks = 0;
+
+    kepfrissites.lastCheck = msTicks;
+    kepfrissites.interval = kepFrissiterInt;
+    lovedekEmelkedes.interval = lovedekEmelkedesInt;
 }
 
 /***************************************************************************//**
