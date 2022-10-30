@@ -30,10 +30,11 @@ void LCD_Kijelzo_Init(){
 // Kiirja az allast osszes:lelott formatumban
 void eredmenyJelzo(uint8_t pOsszesKacsa, uint8_t pLelottKacsa){
 	SegmentLCD_Symbol(LCD_SYMBOL_COL10, 1);	// Kettospont kozepen
-	    if(pOsszesKacsa > 99)
-	        pOsszesKacsa = 99;
+	    if(pOsszesKacsa > 99)	// csak ket digiten tud abrazolni a kijelzo
+	        pOsszesKacsa = 99;	// ez egy biztonsagi intezkedes
 	    if(pLelottKacsa > 99)
 	        pLelottKacsa = 99;
+	    	// igy adja a megfelelo latvanyt
 	    SegmentLCD_Number(100 * pOsszesKacsa + pLelottKacsa);
 }
 

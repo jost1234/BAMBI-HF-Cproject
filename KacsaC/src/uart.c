@@ -6,9 +6,13 @@
  *      Author: DjMastR
  */
 
+// UART flagek
+// volatile hogy a fordito ne egyszerusitse ki
 volatile int UARTValue;
 volatile bool UARTFlag;
 
+
+// Az UART0 felkonfiguralasa
 void InitUART(){
 	CMU->HFPERCLKEN0 |= CMU_HFPERCLKEN0_GPIO;
 	GPIO_PinModeSet(gpioPortF, 7, gpioModePushPull, 1);
@@ -31,8 +35,10 @@ void InitUART(){
 	NVIC_ClearPendingIRQ(UART0_RX_IRQn);
 	NVIC_EnableIRQ(UART0_RX_IRQn);
 
+	// flag torlese
 	UARTFlag = false;
 
+	// uzenet hogy kesz az uart
 	USART_Tx(UART0, 'j');
 	USART_Tx(UART0, 'o');
 	USART_Tx(UART0, 'h');
@@ -42,7 +48,7 @@ void InitUART(){
 }
 
 
-
+// IT fuggveny
 void UART0_RX_IRQHandler(void){
 	USART_IntClear(UART0, USART_IEN_RXDATAV);
 	UARTValue = USART_RxDataGet(UART0);

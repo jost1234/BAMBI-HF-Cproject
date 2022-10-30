@@ -9,41 +9,52 @@
 
 //PELDANYOK
 
-const uint8_t pozicioMin = 0;	// ezen poziciok között lehet
+const uint8_t pozicioMin = 0;	// ezen poziciok kozott lehet
 const uint8_t pozicioMax = 6;	// jatekos, kacsa vagy lovedek
 
 const uint8_t kacsaDefaultIdoKvantum = 5;
 
 uint8_t jatekosPozicio; // kozepen kezdjen
 
+// ha ez true akkor a kacsa elkezd villogni majd meghal
 bool kacsaHaldoklik;
+//segedvaltozo a villogashoz
 uint8_t haldokloKacsaCounter;
+
+// ha ez igaz akkor vege lesz a jateknak
 bool kacsaUtolso;
-uint8_t osszesKacsa;	// eredményjelzönek kell
+uint8_t osszesKacsa;	// eredmenyjelzonek kell
 uint8_t lelottKacsa;	//
 
+// kacsa parameterei
 uint8_t kacsaPozicio;
 uint8_t kacsaElozoPozicio;
 uint8_t kacsaMaradekIdo;
 
+// lovedek parameterei
 lov_type lovedek;
 
 //FUGGVENYEK
 
 //Jatekos fuggvenyek
 
+// a jatekos eggyel balrabb kerul
+// ha a 0. szegmensben van, akkor atkerul a 6. szegmensbe
 void jatekosBalraLep(){
 	if(jatekosPozicio == pozicioMin)
 		jatekosPozicio = pozicioMax;
 	else jatekosPozicio--;
 }
 
+// a jatekos eggyel jobbrabb kerul
+// ha a 6. szegmensben van, akkor atkerul a 0. szegmensbe
 void jatekosJobbraLep(){
 	if(jatekosPozicio == pozicioMax)
 			jatekosPozicio = pozicioMin;
 		else jatekosPozicio++;
 }
 
+// egyszeru getter a jatekos szegmensindexere
 uint8_t getPoz(){
 	return jatekosPozicio;
 }
@@ -51,6 +62,8 @@ uint8_t getPoz(){
 
 //Kacsa fuggvenyek
 
+// letesz valahova egy uj kacsat
+// nem kerulhet oda ahol az elobb volt, hogy kihivas legyen
 void ujKacsa(){
 	do{
 		// ne ugyanoda kerüljön: majd nezzuk meg a randot, ha furan mukodik
@@ -63,6 +76,7 @@ void ujKacsa(){
 	haldokloKacsaCounter = 0;
 }
 
+// eltunik a kacsa, ha 25. volt akkor veget er a jatek
 void eltunoKacsa(){
 	kacsaHaldoklik = false;
 	haldokloKacsaCounter = 0;
@@ -75,7 +89,12 @@ void eltunoKacsa(){
 		kacsaUtolso = true;
 }
 
+// kacsa kezdeti parametereinek beallitasa
 void initKacsa(){
+	// kicsit rossz elnevezes, mert minek kisebb a nehezsegszint, annal nehezebb
+	// ugyanis van egy elettartamkvantum, ez szorzodik a nehezsegszammal
+	// a szorzat adja, hogy meddig el egy kacsa
+	// vagyis az 1-es szint a legnehezebb, es az 5-os a legkonnyebb
 	kacsaElettartam.interval = nehezseg * kacsaElettatramKvantum;
 	kacsaElettartam.lastCheck = 0;
 	kacsaWait.interval = nehezseg * kacsaWaitKvantum;
@@ -99,6 +118,7 @@ void Kacsa(){
 
 //Lovedek fuggvenyek
 
+// a jatekos kilo egy lovadeket alacsony magassagban a jelenlegi szegmenseben
 void lovedekKiloves(uint8_t poz){
 	if(lovedek.aktiv)
 		return;
@@ -108,6 +128,8 @@ void lovedekKiloves(uint8_t poz){
 	lovedekEmelkedes.lastCheck = msTicks;
 }
 
+// a lovedek feljebb szall
+// ha magasan volt elobb es felette kacsa van akkor eltalalja
 void lovedekFeljebb(){
 
 	if(lovedek.magassag == lm_alacsony){
