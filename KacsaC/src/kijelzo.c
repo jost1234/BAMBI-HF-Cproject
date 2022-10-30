@@ -30,10 +30,10 @@ void LCD_Kijelzo_Init(){
 // Kiirja az allast osszes:lelott formatumban
 void eredmenyJelzo(uint8_t pOsszesKacsa, uint8_t pLelottKacsa){
 	SegmentLCD_Symbol(LCD_SYMBOL_COL10, 1);	// Kettospont kozepen
-	    if(pOsszesKacsa > 25)
-	        pOsszesKacsa = 25;
-	    if(pLelottKacsa > 25)
-	        pLelottKacsa = 25;
+	    if(pOsszesKacsa > 99)
+	        pOsszesKacsa = 99;
+	    if(pLelottKacsa > 99)
+	        pLelottKacsa = 99;
 	    SegmentLCD_Number(100 * pOsszesKacsa + pLelottKacsa);
 }
 
@@ -90,6 +90,9 @@ void render(uint8_t jatekosPoz,uint8_t kacsaPoz, bool eltalaltKacsa,
 
 	if(kacsaPozicio < 8)
 		kacsaRender(kacsaPoz, true);
+
+	if(eltalaltKacsa && haldoklasi_fazis%2)
+		kacsaRender(kacsaPoz, false);
 
 	lovedekRender(plovedek);
 

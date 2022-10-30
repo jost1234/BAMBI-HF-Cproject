@@ -28,6 +28,9 @@ const int kacsaElettatramKvantum = 1500;
 idozites kacsaWait;
 const int kacsaWaitKvantum = 500;
 
+idozites kacsaVillogas;
+const int kacsaVillogasInt = 200;
+
 
 
 
@@ -50,6 +53,9 @@ void InitCounter(void){
     lovedekEmelkedes.interval = lovedekEmelkedesInt;
     SzovegCsere.interval = SzovegCsereInt;
     SzovegCsere.lastCheck = 0;
+
+    kacsaVillogas.interval = kacsaVillogasInt;
+    kacsaVillogas.lastCheck = 0;
     /* Setup SysTick Timer for 1 msec interrupts  */
       if (SysTick_Config(CMU_ClockFreqGet(cmuClock_CORE) / 1000)) {
         while (1) ;
