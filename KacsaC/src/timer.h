@@ -16,6 +16,10 @@ typedef struct {
 
 extern volatile uint32_t msTicks;
 
+
+extern idozites SzovegCsere;
+extern const int SzovegCsereInt;
+
 extern idozites kepfrissites;
 
 extern idozites lovedekEmelkedes;
@@ -24,6 +28,7 @@ extern idozites kacsaElettartam;
 extern const int kacsaElettatramKvantum;
 extern idozites kacsaWait;
 extern const int kacsaWaitKvantum;
+
 
 
 void InitCounter(void);
