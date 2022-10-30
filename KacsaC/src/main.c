@@ -124,7 +124,7 @@ int main(void)
 		  // új kepernyokep
 		  if(msTicks - kepfrissites.lastCheck > kepfrissites.interval){
 			  kepfrissites.lastCheck = msTicks;
-			  render(getPoz(),kacsaPozicio[0],0,0,lovedek,osszesKacsa,lelottKacsa);
+			  render(getPoz(),kacsaPozicio,0,0,lovedek,osszesKacsa,lelottKacsa);
 		  }
 		  if(osszesKacsa > 25)
 			  state = _sJatekVege;
