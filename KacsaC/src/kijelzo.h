@@ -8,6 +8,7 @@
 
 #include <stdint.h>
 #include <stdbool.h>
+#include "game.h"
 
 // Kezdeti kepernyo beallitas, utana hasznalhato a kepernyo
     void LCD_Kijelzo_Init();
