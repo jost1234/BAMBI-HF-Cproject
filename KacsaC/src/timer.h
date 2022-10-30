@@ -6,6 +6,9 @@
  */
 #pragma once
 #include "em_timer.h"
+#include "em_cmu.h"
+#include "bsp.h"
+
 
 typedef struct {
     uint32_t lastCheck;

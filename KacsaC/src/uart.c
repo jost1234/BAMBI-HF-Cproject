@@ -28,6 +28,13 @@ void InitUART(){
 	NVIC_EnableIRQ(UART0_RX_IRQn);
 
 	UARTFlag = false;
+
+	USART_Tx(UART0, 'j');
+	USART_Tx(UART0, 'o');
+	USART_Tx(UART0, 'h');
+	USART_Tx(UART0, 'e');
+	USART_Tx(UART0, 't');
+
 }
 
 

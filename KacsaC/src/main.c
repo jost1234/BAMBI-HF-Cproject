@@ -4,6 +4,7 @@
 
 #include "start.h"
 #include "uart.h"
+#include "kijelzo.h"
 #include <ctype.h>
 
 /*
@@ -41,20 +42,24 @@
 */
 typedef enum {_sInit,_sStart, _sJatek, _sJatekVege} allapot;
 
-void Error(){}
+void Error(uint8_t button){
+	//USART_Tx(UART0, button);
+
+}
+
 
 
 
 int main(void)
 {
-	/* Chip errata */
+	// Chip errata
   CHIP_Init();
-
+  InitCounter();
   InitUART();
-
+  LCD_Kijelzo_Init();
   allapot state = _sInit;
-  int button = 0;
-  /* Infinite loop */
+  uint8_t button = 0;
+  // Infinite loop
   while (1) {
 	  switch (state){
 
@@ -79,11 +84,12 @@ int main(void)
 				  state = _sJatek;
 				  break;
 			  default:
-				  Error();
+				  Error(button);
 				  break;
 			  }
 			  UARTFlag = false;
 		  }
+
 
 		  break;
 
@@ -102,12 +108,15 @@ int main(void)
 				  lovedekKiloves(getPoz());
 				  break;
 			  default:
-				  Error();
+				  Error(button);
 				  break;
 			  }
 			  UARTFlag = false;
 		  }
-
+		  if(msTicks - kepfrissites.lastCheck > kepfrissites.interval){
+			  kepfrissites.lastCheck = msTicks;
+			  render(getPoz(),kacsaPozicio[0],0,0,lovedek,osszesKacsa,lelottKacsa);
+		  }
 		  if(osszesKacsa > 25)
 			  state = _sJatekVege;
 		  break;
@@ -122,3 +131,4 @@ int main(void)
 	  }
   }
 }
+

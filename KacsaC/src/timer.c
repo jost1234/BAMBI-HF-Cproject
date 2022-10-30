@@ -32,9 +32,14 @@ void SysTick_Handler(void)
 void InitCounter(void){
     msTicks = 0;
 
-    kepfrissites.lastCheck = msTicks;
+    kepfrissites.lastCheck = 0;
     kepfrissites.interval = kepFrissiterInt;
     lovedekEmelkedes.interval = lovedekEmelkedesInt;
+
+    /* Setup SysTick Timer for 1 msec interrupts  */
+      if (SysTick_Config(CMU_ClockFreqGet(cmuClock_CORE) / 1000)) {
+        while (1) ;
+      }
 }
 
 /***************************************************************************//**
