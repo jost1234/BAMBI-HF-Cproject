@@ -35,9 +35,12 @@ extern uint8_t lelottKacsa;	//
 extern uint8_t kacsaPozicio[DEFAULT_BOARD_SIZE];
 extern uint8_t kacsaElozoPozicio;
 extern uint8_t kacsaMaradekIdo[DEFAULT_BOARD_SIZE];
+extern lov_type lovedek;
+
+
 extern volatile uint32_t msTicks;
 extern idozites kepfrissites;
-extern lov_type lovedek;
+extern idozites lovedekEmelkedes;
 
 //FUGGVENYEK
 

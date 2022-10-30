@@ -29,7 +29,7 @@ void LCD_Kijelzo_Init(){
 
 // Kiirja az allast osszes:lelott formatumban
 void eredmenyJelzo(uint8_t pOsszesKacsa, uint8_t pLelottKacsa){
-	SegmentLCD_Symbol(LCD_SYMBOL_DEGC, 1);	// Kettospont kozepen
+	SegmentLCD_Symbol(LCD_SYMBOL_COL10, 1);	// Kettospont kozepen
 	    if(pOsszesKacsa > 25)
 	        pOsszesKacsa = 25;
 	    if(pLelottKacsa > 25)

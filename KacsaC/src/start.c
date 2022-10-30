@@ -39,14 +39,14 @@ uint8_t charConverter(uint8_t num){
 void nehezsegCsokkent(){
 	if(nehezseg > nehezsegMin){
 		nehezseg--;
-		USART_Tx(UART0,'\n');
+		//USART_Tx(UART0,'\n');
 		USART_Tx(UART0,charConverter(nehezseg));
 	}
 }
 void nehezsegNovel(){
 	if(nehezseg < nehezsegMax){
 		nehezseg++;
-		USART_Tx(UART0,'\n');
+		//USART_Tx(UART0,'\n');
 		USART_Tx(UART0,charConverter(nehezseg));
 	}
 
