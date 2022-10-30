@@ -1,11 +1,12 @@
 #include "em_device.h"
 #include "em_chip.h"
-#include "timer.h"
+
 
 #include "start.h"
 #include "uart.h"
 #include "kijelzo.h"
 #include "segmentlcd.h"
+#include "timer.h"
 #include <ctype.h>
 
 /*
@@ -44,11 +45,8 @@
 typedef enum {_sInit,_sStart, _sJatek, _sJatekVege} allapot;
 
 void Error(uint8_t button){
-	//USART_Tx(UART0, button);
-
+	USART_Tx(UART0, 0);
 }
-
-
 
 
 int main(void)
@@ -83,6 +81,7 @@ int main(void)
 				  nehezsegCsokkent();
 				  break;
 			  case 's':
+				  initKacsa();
 				  state = _sJatek;
 				  break;
 			  default:
@@ -126,7 +125,11 @@ int main(void)
 			  kepfrissites.lastCheck = msTicks;
 			  render(getPoz(),kacsaPozicio,0,0,lovedek,osszesKacsa,lelottKacsa);
 		  }
-		  if(osszesKacsa > 25)
+
+		  //kacsa controll
+		  Kacsa();
+
+		  if(kacsaUtolso)
 			  state = _sJatekVege;
 		  break;
 
