@@ -35,12 +35,12 @@
  *
  */
 
-/* ÁLLAPOTGÉP
+/* ÃLLAPOTGÃ‰P
  *
- *	_sInit: kezdöállapot, feladata a különbözö perifériák, változok beallitasa
- *	_sStart: ekkor lehet nehezseget allitani, 's' karakter érkezése esetén lépünk tovább
- *	_sJatek: a játékosidõ; addig megy, mig nem volt osszesen 25 kacsa
- *	-sJatekVege: a játékosidönek vége
+ *	_sInit: kezdÃ¶Ã¡llapot, feladata a kÃ¼lÃ¶nbÃ¶zÃ¶ perifÃ©riÃ¡k, vÃ¡ltozok beallitasa
+ *	_sStart: ekkor lehet nehezseget allitani, 's' karakter Ã©rkezÃ©se esetÃ©n lÃ©pÃ¼nk tovÃ¡bb
+ *	_sJatek: a jÃ¡tÃ©kosidÅ‘; addig megy, mig nem volt osszesen 25 kacsa
+ *	-sJatekVege: a jÃ¡tÃ©kosidÃ¶nek vÃ©ge
  *
 */
 typedef enum {_sInit,_sStart, _sJatek, _sJatekVege} allapot;
@@ -121,7 +121,7 @@ int main(void)
 			  lovedekFeljebb();
 		  }
 
-		  // új kepernyokep
+		  // Ãºj kepernyokep
 		  if(msTicks - kepfrissites.lastCheck > kepfrissites.interval){
 			  kepfrissites.lastCheck = msTicks;
 			  render(getPoz(),kacsaPozicio,0,0,lovedek,osszesKacsa,lelottKacsa);
@@ -136,6 +136,11 @@ int main(void)
 
 
 	  case _sJatekVege:
+		  if(UARTFlag){
+			  button = tolower(UARTValue);
+			  //if(button == 'r' || button == 'R')
+
+		  }
 		  break;
 
 
