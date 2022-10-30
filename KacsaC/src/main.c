@@ -1,11 +1,12 @@
 #include "em_device.h"
 #include "em_chip.h"
-#include "timer.h"
+
 
 #include "start.h"
 #include "uart.h"
 #include "kijelzo.h"
 #include "segmentlcd.h"
+#include "timer.h"
 #include "game_over.h"
 #include <ctype.h>
 
@@ -34,22 +35,19 @@
  *
  */
 
-/* ÁLLAPOTGÉP
+/* ALLLAPOTGEP
  *
- *	_sInit: kezdöállapot, feladata a különbözö perifériák, változok beallitasa
- *	_sStart: ekkor lehet nehezseget allitani, 's' karakter érkezése esetén lépünk tovább
- *	_sJatek: a játékosidõ; addig megy, mig nem volt osszesen 25 kacsa
- *	-sJatekVege: a játékosidönek vége
+ *	_sInit: kezdÃ¶Ã¡llapot, feladata a kÃ¼lÃ¶nbÃ¶zÃ¶ perifÃ©riÃ¡k, vÃ¡ltozok beallitasa
+ *	_sStart: ekkor lehet nehezseget allitani, 's' karakter Ã©rkezÃ©se esetÃ©n lÃ©pÃ¼nk tovÃ¡bb
+ *	_sJatek: a jÃ¡tÃ©kosidÅ‘; addig megy, mig nem volt osszesen 25 kacsa
+ *	-sJatekVege: a jÃ¡tÃ©kosidÃ¶nek vÃ©ge
  *
 */
 typedef enum {_sInit,_sStart, _sJatek, _sJatekVege} allapot;
 
 void Error(uint8_t button){
-	//USART_Tx(UART0, button);
-
+	USART_Tx(UART0, 0);
 }
-
-
 
 
 int main(void)
@@ -59,6 +57,9 @@ int main(void)
   InitCounter();
   InitUART();
   LCD_Kijelzo_Init();
+
+  srand(GPIO_PortInGet(gpioPortC) * msTicks);
+
   allapot state = _sInit;
   uint8_t button = 0;
   startStringIdx = 0;
@@ -87,7 +88,9 @@ int main(void)
 				  nehezsegCsokkent();
 				  break;
 			  case 's':
-				  // s karakter esetén állapotváltás: kezdjük a játékot
+				  initKacsa();
+
+          // s karakter esetï¿½n ï¿½llapotvï¿½ltï¿½s: kezdjï¿½k a jï¿½tï¿½kot
 				  state = _sJatek;
 				  break;
 			  default:
@@ -133,12 +136,18 @@ int main(void)
 			  lovedekFeljebb();
 		  }
 
-		  // új kepernyokep
+		  // Ãºj kepernyokep
 		  if(msTicks - kepfrissites.lastCheck > kepfrissites.interval){
 			  kepfrissites.lastCheck = msTicks;
 			  render(getPoz(),kacsaPozicio,0,0,lovedek,osszesKacsa,lelottKacsa);
 		  }
-		  if(osszesKacsa > 25){
+
+
+		  //kacsa controll
+		  Kacsa();
+
+		  if(kacsaUtolso)
+
 			  state = _sJatekVege;
 			  gameOverInit();
 		  }
@@ -157,7 +166,7 @@ int main(void)
 			  UARTFlag = false;
 		  }
 
-		  // end credits váltakozik
+		  // end credits vï¿½ltakozik
 		  if(msTicks - SzovegCsere.lastCheck > SzovegCsere.interval){
 			  SzovegCsere.lastCheck = msTicks;
 			  if(!restartStringEnable){

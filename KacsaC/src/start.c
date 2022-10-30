@@ -23,11 +23,12 @@ void initGame(){
 
 	osszesKacsa = 0;
 	lelottKacsa = 0;
+	kacsaUtolso = false;
 	kacsaPozicio = 8;
-	kacsaMaradekIdo = 0;
-	kacsaElozoPozicio = -1;
+	kacsaElozoPozicio = 8;
 
 	lovedek.aktiv = false;
+	lovedek.pozicio = 8;
 }
 
 uint8_t charConverter(uint8_t num){

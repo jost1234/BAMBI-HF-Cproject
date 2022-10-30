@@ -13,12 +13,23 @@ volatile uint32_t msTicks;
 
 idozites kepfrissites;
 const uint32_t kepFrissiterInt = 50; // 20fps
+
 idozites lovedekEmelkedes;
 const int lovedekEmelkedesInt = 300;
+
 idozites kacsaElettartam;
+
 const int kacsaElettatram0nehezsegen = 5000;
 idozites SzovegCsere;
 const int SzovegCsereInt = 1000;
+
+
+const int kacsaElettatramKvantum = 1500;
+idozites kacsaWait;
+const int kacsaWaitKvantum = 500;
+
+
+
 
 /* Local prototypes */
 /***************************************************************************//**
@@ -57,9 +68,3 @@ void Delay(uint32_t dlyTicks)
   while ((msTicks - curTicks) < dlyTicks) ;
 }
 
-RemainingTime CheckTime(RemainingTime input){
-    RemainingTime temp;
-    temp.lastCheck = msTicks;
-    temp.timeRemaining = input.timeRemaining - (temp.lastCheck - input.lastCheck);
-    return temp;
-}

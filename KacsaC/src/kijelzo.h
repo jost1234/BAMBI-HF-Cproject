@@ -20,7 +20,7 @@
     void jatekosRender(uint8_t jatekosPoz);
 
 // Megjeleniti a kacsat a legfelso vonalon
-    void kacsaRender(uint8_t kacsaPoz);
+    void kacsaRender(uint8_t kacsaPoz, bool on);
 
 // Megjelenit egy lovedeket
     void lovedekRender(lov_type lovedek);
