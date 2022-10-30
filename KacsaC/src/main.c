@@ -146,11 +146,12 @@ int main(void)
 		  //kacsa controll
 		  Kacsa();
 
-		  if(kacsaUtolso)
+		  if(kacsaUtolso){
 
 			  state = _sJatekVege;
 			  gameOverInit();
 		  }
+
 		  break;
 
 
