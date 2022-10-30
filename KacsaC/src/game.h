@@ -39,6 +39,8 @@ extern volatile uint32_t msTicks;
 extern idozites kepfrissites;
 extern lov_type lovedek;
 
+
+
 //FUGGVENYEK
 
 void jatekosBalraLep();
