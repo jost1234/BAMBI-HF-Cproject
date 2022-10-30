@@ -7,6 +7,7 @@
 #include "kijelzo.h"
 #include "segmentlcd.h"
 #include "timer.h"
+#include "game_over.h"
 #include <ctype.h>
 
 /*
