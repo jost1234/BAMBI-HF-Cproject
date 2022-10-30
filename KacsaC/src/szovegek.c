@@ -7,11 +7,13 @@
 #include "game.h"
 #include "szovegek.h"
 
+
+// index valtozok
 uint8_t endCreditsIdx = 0;
 uint8_t restartStringIdx = 0;
 uint8_t startStringIdx = 0;
 
-// elöször 1x az endcredit fut le, majd ciklikusan a restartString
+// eloszor 1x az endcredit fut le, majd ciklikusan a restartString
 bool restartStringEnable = false;
 void gameOverInit(){
 	endCreditsIdx = 0;
@@ -27,9 +29,9 @@ void gameOverInit(){
 	end_credits[3][1] = lelottKacsa%10 + '0';
 }
 
-const uint8_t end_credits_size = 12;
+const uint8_t end_credits_size = 14;
 char end_credits[][DEFAULT_BOARD_SIZE] =
-{"Game","Over","Points:","  ","Made","by","Jost","Mark","Benedek","and","Tabajdi","Mate"};
+{"Game","Over","Points:","  ","Made","by","Jost","Mark","Benedek","JXOV52","and","Tabajdi","Mate","JZX5Y4"};
 
 const uint8_t start_string_size = 4;
 const char restart_string[][DEFAULT_BOARD_SIZE] =

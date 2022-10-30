@@ -11,23 +11,33 @@ volatile uint32_t msTicks;
 // uint32_t lastCheck;
 // } idozites;
 
+// IDOZITESI VALTOZOK
+
+// ennyi idonkent jelenit meg egy uj kepet
 idozites kepfrissites;
 const uint32_t kepFrissiterInt = 50; // 20fps
 
+// egy lovedek ennyi idonkent kerul magasabb pozicioba
 idozites lovedekEmelkedes;
 const int lovedekEmelkedesInt = 300;
 
+// ennyi ideig marad ott egy kacsa
 idozites kacsaElettartam;
 
 const int kacsaElettatram0nehezsegen = 5000;
+
+// cserelodo szovegek eseten ennyi idonkent
+// tortenik a csere
 idozites SzovegCsere;
 const int SzovegCsereInt = 1000;
 
-
+// kacsa elettartamanak alapkvantuma
 const int kacsaElettatramKvantum = 1500;
 idozites kacsaWait;
 const int kacsaWaitKvantum = 500;
 
+
+// egy villogo kacsa ennyi idonkent villog
 idozites kacsaVillogas;
 const int kacsaVillogasInt = 200;
 
@@ -48,6 +58,7 @@ void SysTick_Handler(void)
 void InitCounter(void){
     msTicks = 0;
 
+    // idointervallumok beallitasa
     kepfrissites.lastCheck = 0;
     kepfrissites.interval = kepFrissiterInt;
     lovedekEmelkedes.interval = lovedekEmelkedesInt;

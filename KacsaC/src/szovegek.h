@@ -15,9 +15,11 @@
 // ciklikusan kiir egy szoveget az also sorba
 void endCreditsPrint(char* stringArray[DEFAULT_BOARD_SIZE],uint8_t size, uint8_t idx);
 
-// a játék végén meg kell hívni hogy jol fusson le az endcredits
+// a jatek vegen meg kell hivni ahhoz, hogy jol fusson le az endcredits
 void gameOverInit();
 
+
+// kulso definiciok szovegek.c-bol
 extern const uint8_t end_credits_size;
 extern char end_credits[][DEFAULT_BOARD_SIZE];
 extern const uint8_t start_string_size;
