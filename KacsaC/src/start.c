@@ -7,6 +7,7 @@
 
 #include "start.h"
 #include "game.h"
+#include "uart.h"
 
 //PELDANYOK
 
@@ -31,11 +32,22 @@ void initGame(){
 	lovedek.aktiv = false;
 }
 
+uint8_t charConverter(uint8_t num){
+	return num + '0';
+}
+
 void nehezsegCsokkent(){
-	if(nehezseg > nehezsegMin)
+	if(nehezseg > nehezsegMin){
 		nehezseg--;
+		USART_Tx(UART0,'\n');
+		USART_Tx(UART0,charConverter(nehezseg));
+	}
 }
 void nehezsegNovel(){
-	if(nehezseg < nehezsegMax)
+	if(nehezseg < nehezsegMax){
 		nehezseg++;
+		USART_Tx(UART0,'\n');
+		USART_Tx(UART0,charConverter(nehezseg));
+	}
+
 }
