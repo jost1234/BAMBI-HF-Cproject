@@ -17,6 +17,8 @@ idozites lovedekEmelkedes;
 const int lovedekEmelkedesInt = 300;
 idozites kacsaElettartam;
 const int kacsaElettatram0nehezsegen = 5000;
+idozites endCreditSzovegCsere;
+const int endCreditSzovegCsereInt = 1000;
 
 /* Local prototypes */
 /***************************************************************************//**

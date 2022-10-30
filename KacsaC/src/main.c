@@ -6,6 +6,7 @@
 #include "uart.h"
 #include "kijelzo.h"
 #include "segmentlcd.h"
+#include "game_over.h"
 #include <ctype.h>
 
 /*
@@ -132,6 +133,11 @@ int main(void)
 
 
 	  case _sJatekVege:
+		  if(UARTFlag){
+			  button = tolower(UARTValue);
+			  //if(button == 'r' || button == 'R')
+
+		  }
 		  break;
 
 
