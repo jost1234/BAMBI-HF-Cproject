@@ -29,15 +29,17 @@ typedef struct{
 
 extern uint8_t jatekosPozicio; // kozepen kezdjen
 
-extern uint8_t osszesKacsa;	// eredményjelzönek kell
+extern uint8_t osszesKacsa;	// eredmÃ©nyjelzÃ¶nek kell
 extern uint8_t lelottKacsa;	//
 
 extern uint8_t kacsaPozicio;
 extern uint8_t kacsaElozoPozicio;
 extern uint8_t kacsaMaradekIdo;
+extern lov_type lovedek;
+
 extern volatile uint32_t msTicks;
 extern idozites kepfrissites;
-extern lov_type lovedek;
+extern idozites lovedekEmelkedes;
 
 
 extern volatile uint32_t msTicks;

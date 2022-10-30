@@ -63,12 +63,16 @@ void eltunoKacsa(int poz){
 //Lovedek fuggvenyek
 
 void lovedekKiloves(uint8_t poz){
+	if(lovedek.aktiv)
+		return;
 	lovedek.aktiv = true;
 	lovedek.pozicio = poz;
 	lovedek.magassag = lm_alacsony;
+	lovedekEmelkedes.lastCheck = msTicks;
 }
 
 void lovedekFeljebb(){
+
 	if(lovedek.magassag == lm_alacsony){
 		lovedek.magassag = lm_magas;
 	}

@@ -5,6 +5,7 @@
 #include "start.h"
 #include "uart.h"
 #include "kijelzo.h"
+#include "segmentlcd.h"
 #include <ctype.h>
 
 /*
@@ -66,6 +67,7 @@ int main(void)
 
 	  case _sInit:
 		  initGame();
+		  SegmentLCD_Write("Start");
 		  state = _sStart;
 		  break;
 
@@ -113,6 +115,13 @@ int main(void)
 			  }
 			  UARTFlag = false;
 		  }
+		  // feljebb emelkedik egy lovedek
+		  if(msTicks - lovedekEmelkedes.lastCheck > lovedekEmelkedes.interval){
+			  lovedekEmelkedes.lastCheck = msTicks;
+			  lovedekFeljebb();
+		  }
+
+		  // új kepernyokep
 		  if(msTicks - kepfrissites.lastCheck > kepfrissites.interval){
 			  kepfrissites.lastCheck = msTicks;
 			  render(getPoz(),kacsaPozicio,0,0,lovedek,osszesKacsa,lelottKacsa);
