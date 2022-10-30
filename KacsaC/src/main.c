@@ -115,7 +115,7 @@ int main(void)
 		  }
 		  if(msTicks - kepfrissites.lastCheck > kepfrissites.interval){
 			  kepfrissites.lastCheck = msTicks;
-			  render(getPoz(),kacsaPozicio[0],0,0,lovedek,osszesKacsa,lelottKacsa);
+			  render(getPoz(),kacsaPozicio,0,0,lovedek,osszesKacsa,lelottKacsa);
 		  }
 		  if(osszesKacsa > 25)
 			  state = _sJatekVege;

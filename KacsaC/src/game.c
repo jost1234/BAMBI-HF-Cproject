@@ -19,9 +19,9 @@ uint8_t jatekosPozicio; // kozepen kezdjen
 uint8_t osszesKacsa;	// eredményjelzönek kell
 uint8_t lelottKacsa;	//
 
-uint8_t kacsaPozicio[DEFAULT_BOARD_SIZE];
+uint8_t kacsaPozicio;
 uint8_t kacsaElozoPozicio;
-uint8_t kacsaMaradekIdo[DEFAULT_BOARD_SIZE];
+uint8_t kacsaMaradekIdo;
 
 lov_type lovedek;
 
@@ -49,17 +49,14 @@ uint8_t getPoz(){
 //Kacsa fuggvenyek
 
 void ujKacsa(){
-	int i;
 	do{
 		// ne ugyanoda kerüljön: majd nezzuk meg a randot, ha furan mukodik
-		 i = pozicioMin + rand()*pozicioMax;
-		 if(!kacsaPozicio[i])
-			 kacsaPozicio[i] = 1;
-	} while (i == kacsaElozoPozicio);
+		kacsaPozicio = pozicioMin + rand()*pozicioMax;
+	} while (kacsaPozicio == kacsaElozoPozicio);
 }
 
 void eltunoKacsa(int poz){
-	kacsaPozicio[poz] = 0;
+	kacsaPozicio = 8;
 	osszesKacsa++;
 }
 
@@ -77,7 +74,7 @@ void lovedekFeljebb(){
 	}
 	else if(lovedek.magassag == lm_magas){ // vagyis
 		// ha eltalal egy kacsat: a kacsa meghal
-		if(kacsaPozicio[lovedek.pozicio]){
+		if(kacsaPozicio == lovedek.pozicio){
 			eltunoKacsa(lovedek.pozicio);
 			lelottKacsa++;
 		}

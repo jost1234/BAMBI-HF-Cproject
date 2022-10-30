@@ -32,9 +32,9 @@ extern uint8_t jatekosPozicio; // kozepen kezdjen
 extern uint8_t osszesKacsa;	// eredményjelzönek kell
 extern uint8_t lelottKacsa;	//
 
-extern uint8_t kacsaPozicio[DEFAULT_BOARD_SIZE];
+extern uint8_t kacsaPozicio;
 extern uint8_t kacsaElozoPozicio;
-extern uint8_t kacsaMaradekIdo[DEFAULT_BOARD_SIZE];
+extern uint8_t kacsaMaradekIdo;
 extern volatile uint32_t msTicks;
 extern idozites kepfrissites;
 extern lov_type lovedek;
