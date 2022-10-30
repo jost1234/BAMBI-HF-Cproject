@@ -17,8 +17,8 @@ idozites lovedekEmelkedes;
 const int lovedekEmelkedesInt = 300;
 idozites kacsaElettartam;
 const int kacsaElettatram0nehezsegen = 5000;
-idozites endCreditSzovegCsere;
-const int endCreditSzovegCsereInt = 1000;
+idozites SzovegCsere;
+const int SzovegCsereInt = 1000;
 
 /* Local prototypes */
 /***************************************************************************//**
@@ -37,7 +37,8 @@ void InitCounter(void){
     kepfrissites.lastCheck = 0;
     kepfrissites.interval = kepFrissiterInt;
     lovedekEmelkedes.interval = lovedekEmelkedesInt;
-
+    SzovegCsere.interval = SzovegCsereInt;
+    SzovegCsere.lastCheck = 0;
     /* Setup SysTick Timer for 1 msec interrupts  */
       if (SysTick_Config(CMU_ClockFreqGet(cmuClock_CORE) / 1000)) {
         while (1) ;

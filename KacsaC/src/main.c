@@ -61,6 +61,9 @@ int main(void)
   LCD_Kijelzo_Init();
   allapot state = _sInit;
   uint8_t button = 0;
+  startStringIdx = 0;
+
+
   // Infinite loop
   while (1) {
 	  switch (state){
@@ -68,7 +71,7 @@ int main(void)
 
 	  case _sInit:
 		  initGame();
-		  SegmentLCD_Write("Start");
+
 		  state = _sStart;
 		  break;
 
@@ -84,6 +87,7 @@ int main(void)
 				  nehezsegCsokkent();
 				  break;
 			  case 's':
+				  // s karakter esetén állapotváltás: kezdjük a játékot
 				  state = _sJatek;
 				  break;
 			  default:
@@ -92,7 +96,11 @@ int main(void)
 			  }
 			  UARTFlag = false;
 		  }
-
+		  if(msTicks - SzovegCsere.lastCheck > SzovegCsere.interval){
+		  			  SzovegCsere.lastCheck = msTicks;
+		  			SegmentLCD_Write(start_string[startStringIdx%start_string_size]);
+		  			startStringIdx++;
+		  }
 
 		  break;
 
@@ -110,6 +118,9 @@ int main(void)
 			  case 'w':
 				  lovedekKiloves(getPoz());
 				  break;
+			  case 'm':
+				  osszesKacsa = 26;
+				  lelottKacsa = 42;
 			  default:
 				  Error(button);
 				  break;
@@ -127,15 +138,37 @@ int main(void)
 			  kepfrissites.lastCheck = msTicks;
 			  render(getPoz(),kacsaPozicio,0,0,lovedek,osszesKacsa,lelottKacsa);
 		  }
-		  if(osszesKacsa > 25)
+		  if(osszesKacsa > 25){
 			  state = _sJatekVege;
+			  gameOverInit();
+		  }
 		  break;
 
 
 	  case _sJatekVege:
 		  if(UARTFlag){
 			  button = tolower(UARTValue);
-			  //if(button == 'r' || button == 'R')
+			  if(button == 'r'){
+				  state = _sInit;
+				  UARTFlag = false;
+
+				  break;
+			  }
+			  UARTFlag = false;
+		  }
+
+		  // end credits váltakozik
+		  if(msTicks - SzovegCsere.lastCheck > SzovegCsere.interval){
+			  SzovegCsere.lastCheck = msTicks;
+			  if(!restartStringEnable){
+				  SegmentLCD_Write(end_credits[endCreditsIdx++]);
+				  if(endCreditsIdx == end_credits_size)
+					  restartStringEnable = true;
+			  }
+			  else{
+				  SegmentLCD_Write(restart_string[(restartStringIdx++)%start_string_size]);
+
+			  }
 
 		  }
 		  break;

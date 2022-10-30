@@ -21,7 +21,8 @@ typedef struct {
 } idozites;
 
 
-
+extern idozites SzovegCsere;
+extern const int SzovegCsereInt;
 
 
 void InitCounter(void);
